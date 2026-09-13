@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>pecking order — a two-player seed scramble</title>
+  <meta name="description" content="Two chickens. One minute. Push farmyard objects, uncover seeds and out-peck your opponent in a local two-player game.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b3025'/%3E%3Cellipse cx='16' cy='16' rx='6' ry='10' transform='rotate(35 16 16)' fill='%23e7b966'/%3E%3Cpath d='M12 22l8-12' stroke='%239c6a2e' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./game.js"></script>
+</head>
+<body>
+<main class="app">
+  <header class="masthead"><a class="brand" href="./" aria-label="pecking order home"><span class="brand-mark" aria-hidden="true">✳</span> pecking order<span class="edition">the farmyard games</span></a><div class="top-actions"><span class="local-note">2 players · 1 keyboard</span><button id="sound" class="icon-button" aria-label="mute chicken sounds" aria-pressed="false"><span id="soundIcon" aria-hidden="true">♫</span><span id="soundText">sound on</span></button><button id="fullscreen" class="icon-button" aria-label="enter full screen">⛶ <span>full screen</span></button></div></header>
+  <section class="game-shell" aria-label="two-player chicken game">
+    <div class="scoreboard">
+      <div class="player player-one"><div class="avatar"><canvas id="portrait1" width="100" height="100" aria-hidden="true"></canvas></div><div class="player-details"><div class="eyebrow"><span class="player-dot"></span>player one</div><div class="player-name">pearl <span class="control-label">wasd</span></div></div><div class="score"><strong id="score1">0</strong><span>seeds</span></div></div>
+      <div class="clock"><span id="roundLabel" class="eyebrow">the seed scramble</span><div id="timer" role="timer" aria-label="60 seconds remaining">1:00</div><div class="timer-track"><div id="timerFill"></div></div></div>
+      <div class="player player-two"><div class="score"><strong id="score2">0</strong><span>seeds</span></div><div class="player-details"><div class="eyebrow">player two<span class="player-dot"></span></div><div class="player-name"><span class="control-label">↑ ← ↓ →</span>rusty</div></div><div class="avatar"><canvas id="portrait2" width="100" height="100" aria-hidden="true"></canvas></div></div>
+    </div>
+    <div id="arena" class="arena">
+      <canvas id="game" width="1440" height="900" tabindex="0" aria-label="farmyard. player one moves with w a s d. player two moves with arrow keys. walk into objects to push them and collect uncovered seeds. press left shift to pause or resume."></canvas>
+      <div class="arena-caption"><span class="sun-icon" aria-hidden="true">☼</span> willowbrook farm <span>afternoon session</span></div>
+      <button id="pause" class="arena-pause" aria-label="pause game (left shift)" title="pause (left shift)" hidden>Ⅱ</button>
+      <div id="overlay" class="overlay">
+        <div class="start-card" id="startCard"><span class="mini-label">a little friendly fowl play</span><h1>ready, set,<br><em>peck.</em></h1><p>two chickens. one minute.<br>the most seeds takes the crown.</p><div class="start-rule"><span aria-hidden="true">↔</span> push objects to uncover hidden seeds.</div><button id="start" class="primary" disabled>preparing the farmyard…</button><span class="keyboard-note">grab a friend & share a keyboard</span></div>
+        <div class="countdown" id="countdown" hidden aria-live="polite"></div>
+        <div class="start-card compact" id="pauseCard" hidden><span class="mini-label">a moment to catch your beak</span><h2>taking a breather.</h2><p>the clock is paused for both players.</p><button id="resume" class="primary">back to the farmyard →</button><button id="restartPaused" class="text-button">start a fresh round</button></div>
+        <div class="start-card compact" id="resultCard" hidden><span class="mini-label">the final pecking order</span><div class="winner-portrait"><canvas id="winnerPortrait" width="180" height="150" aria-hidden="true"></canvas></div><h2 id="winnerTitle"></h2><p id="winnerMessage"></p><div class="final-scores"><span>pearl <strong id="final1">0</strong></span><span>rusty <strong id="final2">0</strong></span></div><button id="again" class="primary">one more round →</button></div>
+      </div>
+      <div class="touch-controls" id="touchControls"><div class="pad" aria-label="player one touch controls"><button data-player="0" data-dir="up" aria-label="player one up">↑</button><button data-player="0" data-dir="left" aria-label="player one left">←</button><button data-player="0" data-dir="down" aria-label="player one down">↓</button><button data-player="0" data-dir="right" aria-label="player one right">→</button></div><div class="pad" aria-label="player two touch controls"><button data-player="1" data-dir="up" aria-label="player two up">↑</button><button data-player="1" data-dir="left" aria-label="player two left">←</button><button data-player="1" data-dir="down" aria-label="player two down">↓</button><button data-player="1" data-dir="right" aria-label="player two right">→</button></div></div>
+    </div>
+    <footer class="game-footer"><div class="key-guide"><span class="key-group"><kbd>w</kbd><span><kbd>a</kbd><kbd>s</kbd><kbd>d</kbd></span></span><div><strong>pearl</strong><span>the white hen</span></div></div><div class="how-to"><span>move to collect</span><i>·</i><span>push to discover</span><i>·</i><span>most seeds wins</span></div><div class="key-guide right"><div><strong>rusty</strong><span>the russet hen</span></div><span class="key-group"><kbd>↑</kbd><span><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span></span></div></footer>
+  </section>
+  <div class="under-game"><span id="hint">a fresh scattering of seeds in every round.</span><span>pause / resume <kbd class="pause-key">left shift</kbd></span></div>
+  <footer class="creator-credit">created by <a href="https://github.com/fraise-a" target="_blank" rel="noopener noreferrer">fraise aurora <span aria-hidden="true">↗</span></a><span class="credit-divider" aria-hidden="true">·</span><a href="https://github.com/fraise-a" target="_blank" rel="noopener noreferrer" aria-label="fraise aurora on github">github.com/fraise-a</a></footer>
+  <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+</main>
+</body></html>
