@@ -2,6 +2,8 @@
 
 a two-player html5 farmyard game by [fraise aurora](https://github.com/fraise-a).
 
+## [▶ play pecking order](https://fraise-a.github.io/pecking-order/)
+
 play as pearl, a white hen, or rusty, a russet hen. collect the most seeds in one minute. push crates, straw bales and pots to uncover hidden seeds.
 
 ## controls
